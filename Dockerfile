@@ -25,7 +25,8 @@ RUN cd /usr/src/ \
 
 RUN useradd --uid 9014 --groups dialout --no-create-home --shell /bin/bash --home-dir $HOME $USERNAME \
         && mkdir $HOME \
-        && echo $VERSION > $HOME/grc-research-version.txt \
+        && mkdir $HOME/.GridcoinResearch \
+        && echo $VERSION > $HOME/.GridcoinResearch/grc-research-version.txt \
         && chown -R $USERNAME:$USERNAME $HOME
 
 
