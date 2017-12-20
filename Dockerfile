@@ -8,7 +8,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       ca-certificates \
       git gcc make curl build-essential libssl-dev libdb-dev libdb++-dev libqrencode-dev libcurl4-openssl-dev libzip-dev libzip4 libboost-all-dev \
-      net-tools \
+      net-tools unzip wget \
  && rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/src/ \
@@ -23,12 +23,16 @@ RUN cd /usr/src/ \
  && install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd \
  && rm -rf /usr/src/Gridcoin-Research
 
-RUN useradd --uid 1000 --groups dialout --no-create-home --shell /bin/bash --home-dir $HOME $USERNAME \
+RUN useradd --uid 9014 --groups dialout --no-create-home --shell /bin/bash --home-dir $HOME $USERNAME \
         && mkdir $HOME \
+        && echo $VERSION > $HOME/grc-research-version.txt
         && chown -R $USERNAME:$USERNAME $HOME
+
 
 VOLUME $HOME/.GridcoinResearch/
 
 USER $USERNAME
 
 WORKDIR $HOME
+
+CMD ["gridcoinresearchd"]
