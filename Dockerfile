@@ -36,4 +36,4 @@ USER $USERNAME
 
 WORKDIR $HOME
 
-CMD ["gridcoinresearchd"]
+ENTRYPOINT ["gridcoinresearchd"]
